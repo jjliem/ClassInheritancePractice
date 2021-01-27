@@ -1,33 +1,37 @@
-class Person {
-    //creates instance of Person with properties name, age, and numBooksRead
-    constructor(name, age, numBooksRead) {
+class Creature {
+    //creates instance of Creature with properties name, age, and location
+    constructor(name, age, location) {
         this.name = name;
         this.age = age;
-        this.numBooksRead = numBooksRead;
+        this.location = location;
     }
 
-    //increments numBooksRead by 1
-    readNewBook() {
-        this.numBooksRead++;
-    }
-}
-
-class Electrician extends Person {
-    //creates instance of Electrician with Person properites plus certifications, an array of strings
-    constructor(name, age, numBooksRead, certifications) {
-        super(name, age, numBooksRead);
-        this.certifications = certifications;
+    //changes location
+    changeLocation(newLoc) {
+        this.location = newLoc;
     }
 }
 
-class Teenager extends Person {
-    //creates instance of Teenager with Person properties plus isHungry, a boolean value
-    constructor(name, age, numBooksRead, isHungry = true) {
-        super(name, age, numBooksRead);
+class Mermaid extends Creature {
+    //creates instance of Mermaid with Creature properites plus numShellsCollected, an array of strings
+    constructor(name, age, location, numShellsCollected) {
+        super(name, age, location);
+        this.numShellsCollected = numShellsCollected;
+    }
+
+    findShell() {
+        this.numShellsCollected++;
+    }
+}
+
+class Werewolf extends Creature {
+    //creates instance of Werewolf with Creature properties plus isHungry, a boolean value
+    constructor(name, age, location, isHungry = true) {
+        super(name, age, location);
         this.isHungry = isHungry;
     }
 
-    //feeds the teenager.  If they are hungry, changes isHungry to false, if they are not hungry, prints message to console.
+    //feeds the Werewolf.  If they are hungry, changes isHungry to false, if they are not hungry, prints message to console.
     eat() {
         if(this.isHungry) {
             this.isHungry = false;
@@ -40,30 +44,29 @@ class Teenager extends Person {
 //below we will test our classes by instantiating them, calling each method, and verifying output
 
 //create instances of each class
-let person = new Person('Euthyphro', 35, 0);
-let electrician = new Electrician('Zeus', 28, 3, ['Lightning', 'Polymorphism']);
-let teen = new Teenager('Persius', 16, 5, true);
+let judy = new Creature('Judy', 21, 'Texas');
+let ariel = new Mermaid('Ariel', 30, 'Pacific Ocean', 300);
+let jacob = new Werewolf('Jacob', 25, 'Redwoods', true);
 
 //log each instance
-console.log(person);
-console.log(electrician);
-console.log(teen);
+console.log(judy);
+console.log(ariel);
+console.log(jacob);
 
 //call the method from the parent class to ensure it works as expected
-person.readNewBook();
-electrician.readNewBook();
-teen.readNewBook();
+judy.changeLocation('Bali');
+ariel.changeLocation('Atlantic Ocean');
+jacob.changeLocation('Yosemite');
 
-//log the objects after calling .readNewBook() to verify it worked as intended
-console.log(person);
-console.log(electrician);
-console.log(teen);
+//log the objects after calling .changeLocation() to verify it worked as intended
+console.log(judy);
+console.log(ariel);
+console.log(jacob);
 
 //call .eat()
-teen.eat();
+jacob.eat();
+console.log(jacob);
 
-//check that .eat() when isHungry == true works as expected
-console.log(teen);
-
-//check that .eat() when isHungry == false works as expected
-teen.eat();
+//check that .findShell() wworks as expected
+ariel.findShell();
+console.log(ariel);
